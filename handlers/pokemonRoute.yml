@@ -1,0 +1,50 @@
+add-pokemon:
+  handler: src/functions/pokemon/add-pokemon.handler
+  name: ${self:custom.dotenv.API_NAME}-add-pokemon
+  description: Função para adicionar um novo pokemon
+  memorySize: 128
+  events:
+    - http:
+        path: /pokemon
+        method: post
+        cors: true
+update-pokemon:
+  handler: src/functions/pokemon/update-pokemon.handler
+  name: ${self:custom.dotenv.API_NAME}-update-pokemon
+  description: Função para atualizar os dades de um pokemon
+  memorySize: 128
+  events:
+    - http:
+        path: /pokemon/{pokemonID}
+        method: put
+        cors: true
+delete-pokemon:
+  handler: src/functions/pokemon/delete-pokemon.handler
+  name: ${self:custom.dotenv.API_NAME}-delete-pokemon
+  description: Função para deletar um pokemon
+  memorySize: 128
+  events:
+    - http:
+        path: /pokemon/{pokemonID}
+        method: delete
+        cors: true
+list-pokemon:
+  handler: src/functions/pokemon/list-pokemon.handler
+  name: ${self:custom.dotenv.API_NAME}-list-pokemon
+  description: Função para listar pokemons
+  memorySize: 128
+  events:
+    - http:
+        path: /pokemon
+        method: get
+        cors: true
+get-pokemon:
+  handler: src/functions/pokemon/get-pokemon.handler
+  name: ${self:custom.dotenv.API_NAME}-get-pokemon
+  description: Função para buscar somente um pokemon
+  memorySize: 128
+  events:
+    - http:
+        path: /pokemon/{pokemonID}
+        method: get
+        cors: true

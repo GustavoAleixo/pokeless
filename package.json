@@ -1,0 +1,39 @@
+{
+  "name": "pokeless",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "local": "npx sls offline --stage dev"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/core": "^7.18.6",
+    "@babel/preset-env": "^7.18.6",
+    "babel-loader": "^8.2.5",
+    "eslint": "^8.19.0",
+    "eslint-config-standard": "^17.0.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^6.0.0",
+    "serverless-dotenv-plugin": "^4.0.1",
+    "serverless-layers": "^2.5.4",
+    "serverless-offline": "^8.8.0",
+    "serverless-plugin-split-stacks": "^1.11.3",
+    "serverless-webpack": "^5.7.1",
+    "webpack": "^5.73.0",
+    "webpack-node-externals": "^3.0.0",
+    "webpackbar": "^5.0.2"
+  },
+  "dependencies": {
+    "dotenv": "^16.0.1",
+    "fs": "^0.0.1-security",
+    "glob": "^8.0.3",
+    "mongoose": "^6.4.3",
+    "uuid": "^8.3.2",
+    "yamljs": "^0.3.0",
+    "yup": "^0.32.11"
+  }
+}

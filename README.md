@@ -67,8 +67,8 @@ With this command, a docker container will be created containing mongoDB locally
 
 ## Endpoints
 
-`[POST] /dev/pokemon/{pokemonID}`: Create new pokemon
-`[PUT] /dev/pokemon/{pokemonID}`: Update a pokemon
-`[DELETE] /dev/pokemon/{pokemonID}`: Delete a pokemon
-`[GET] - /dev/pokemon/{pokemonID}`: Get a expefic pokemon
-`[GET] - /dev/pokemon`: List all pokemons
+- `[POST] /dev/pokemon/{pokemonID}`: Create new pokemon
+- `[PUT] /dev/pokemon/{pokemonID}`: Update a pokemon
+- `[DELETE] /dev/pokemon/{pokemonID}`: Delete a pokemon
+- `[GET] - /dev/pokemon/{pokemonID}`: Get a expefic pokemon
+- `[GET] - /dev/pokemon`: List all pokemons

@@ -1,10 +1,7 @@
 import '../../database/mongodbConnection'
 
-import { PokemonModel } from '../../models/pokemon';
-
 import {
-  getPathParameter,
-  validateID
+  getPathParameter
 } from '../../shared/validators'
 
 import {
@@ -14,15 +11,18 @@ import {
   responseWithBadRequest
 } from '../../shared/responses'
 
+import {
+  getPokemonByID
+} from '../../database/dynamodbConnection'
+
 export const handler = async (event) => {
   try {
     const { pokemonID } = getPathParameter(event)
 
-    const isValidID = pokemonID && validateID(pokemonID)
-    if (!isValidID)
-      return responseWithBadRequest('pokemonID inválido')
+    if (!pokemonID)
+      return responseWithBadRequest('pokemonID não informado')
 
-    const pokemon = await PokemonModel.findById(pokemonID)
+    const pokemon = await getPokemonByID(pokemonID)
 
     if (!pokemon)
       return responseWithNotFound('Pokemon não encontrado')

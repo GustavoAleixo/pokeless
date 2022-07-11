@@ -7,37 +7,47 @@ export const STATUS_CODE = {
 }
 
 export const responseWithError = (message) => {
-    return JSON.stringify({
-        status: STATUS_CODE.ERROR,
-        message: message
-    })
+    return {
+        statusCode: STATUS_CODE.ERROR,
+        body: JSON.stringify({
+            message
+        })
+    }
 }
 
 export const responseWithBadRequest = (message) => {
-    return JSON.stringify({
-        status: STATUS_CODE.BAD_REQUEST,
-        message: message
-    })
+    return {
+        statusCode: STATUS_CODE.BAD_REQUEST,
+        body: JSON.stringify({
+            message
+        })
+    }
 }
 
 export const responseWithNotFound = (message) => {
-    return JSON.stringify({
-        status: STATUS_CODE.BAD_REQUEST,
-        message: message
-    })
+    return {
+        statusCode: STATUS_CODE.NOT_FOUND,
+        body: JSON.stringify({
+            message
+        })
+    }
 }
 
 export const responseWithConflict = (message) => {
-    return JSON.stringify({
-        status: STATUS_CODE.CONFLICT,
-        message: message
-    })
+    return {
+        statusCode: STATUS_CODE.CONFLICT,
+        body: JSON.stringify({
+            message
+        })
+    }
 }
 
 export const responseWithSuccess = (data, message) => {
-    return JSON.stringify({
-        status: STATUS_CODE.SUCCESS,
-        data,
-        message
-    })
+    return {
+        statusCode: STATUS_CODE.SUCCESS,
+        body: JSON.stringify({
+            data,
+            message
+        })
+    }
 }

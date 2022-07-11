@@ -1,20 +1,23 @@
 import '../../database/mongodbConnection'
 
-import { PokemonModel } from '../../models/pokemon';
-
 import {
   responseWithError,
   responseWithSuccess
 } from '../../shared/responses'
 
+import {
+  getPokemons
+} from '../../database/dynamodbConnection'
+
 export const handler = async () => {
   try {
-    const pokemons = await PokemonModel.find({})
 
-    if (pokemons.length === 0)
+    const { Items } = await getPokemons()
+
+    if (Items.length === 0)
       return responseWithSuccess([], 'Nenhum pokemon encontrado')
 
-    return responseWithSuccess(pokemons, 'Pokemons encontrados com sucesso')
+    return responseWithSuccess(Items, 'Pokemons encontrados com sucesso')
 
   } catch (error) {
     const { message } = error

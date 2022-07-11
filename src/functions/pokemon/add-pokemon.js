@@ -1,5 +1,6 @@
 import '../../database/mongodbConnection'
 import * as Yup from 'yup'
+import * as uuid from 'uuid'
 
 import { PokemonModel } from '../../models/pokemon';
 
@@ -15,6 +16,10 @@ import {
   responseWithConflict,
   responseWithBadRequest
 } from '../../shared/responses'
+
+import {
+  addOrUpdatePokemon
+} from '../../database/dynamodbConnection'
 
 let bodyValidade = Yup.object().shape({
   name: Yup.string().required(),
@@ -33,12 +38,18 @@ export const handler = async (event) => {
     )
 
     const { name, level } = body
-    const exists = await PokemonModel.findOne({ name })
+    const pokemon = await addOrUpdatePokemon({
+      id: uuid.v4(),
+      name,
+      level
+    })
 
-    if (exists)
-      return responseWithConflict('Já existe um pokemon com este mesmo nome')
+    // const exists = await PokemonModel.findOne({ name })
 
-    const pokemon = await PokemonModel.create({ name, level })
+    // if (exists)
+    //   return responseWithConflict('Já existe um pokemon com este mesmo nome')
+
+    // const pokemon = await PokemonModel.create({ name, level })
 
     return responseWithSuccess(pokemon, 'Pokemon inserido com sucesso')
 

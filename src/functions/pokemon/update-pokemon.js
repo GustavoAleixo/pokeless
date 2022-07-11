@@ -1,13 +1,9 @@
 import '../../database/mongodbConnection'
 import * as Yup from 'yup'
 
-import { PokemonModel } from '../../models/pokemon';
-
 import {
   getBody,
-  getPathParameter,
-  errorValidator,
-  validateID
+  errorValidator
 } from '../../shared/validators'
 
 import {
@@ -18,17 +14,19 @@ import {
   responseWithBadRequest
 } from '../../shared/responses'
 
+import {
+  getPokemonByID,
+  addOrUpdatePokemon
+} from '../../database/dynamodbConnection'
+
 let bodyValidade = Yup.object().shape({
+  id: Yup.string().required(),
   name: Yup.string().required(),
   level: Yup.number().required()
 })
 
 export const handler = async (event) => {
   try {
-    const { pokemonID } = getPathParameter(event)
-    const isValidID = pokemonID && validateID(pokemonID)
-    if (!isValidID)
-      return responseWithBadRequest('pokemonID inválido')
 
     const body = getBody(event)
     await bodyValidade.validate(
@@ -38,13 +36,16 @@ export const handler = async (event) => {
       }
     )
 
-    const { nome, level } = body
-    const pokemon = await PokemonModel.findByIdAndUpdate(pokemonID, { nome, level })
+    const { id, name, level } = body
+    const { Item } = await getPokemonByID(id)
 
-    if (!pokemon)
+    if (!Item)
       return responseWithNotFound('Pokemon não encontrado')
+    
+    const pokemon = await addOrUpdatePokemon({ id, name, level })
 
-    return responseWithSuccess(pokemon, 'Pokemon atualizado com sucesso')
+    if (pokemon)
+    return responseWithSuccess(Item, 'Pokemon atualizado com sucesso')
 
   } catch (error) {
     const { statusCode, message } = errorValidator(error)

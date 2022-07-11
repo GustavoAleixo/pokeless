@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "deploy-prod": "npx sls deploy --stage prod",
     "local": "npx sls offline --stage dev"
   },
   "keywords": [],
@@ -28,7 +29,9 @@
     "webpackbar": "^5.0.2"
   },
   "dependencies": {
+    "aws-sdk": "^2.1170.0",
     "dotenv": "^16.0.1",
+    "dynamoose": "^2.8.5",
     "fs": "^0.0.1-security",
     "glob": "^8.0.3",
     "mongoose": "^6.4.3",
